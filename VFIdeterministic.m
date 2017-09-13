@@ -4,6 +4,10 @@ alpha = 0.35;
 beta = 0.99;
 delta = 0.025;
 sigma = 2;
+pi=[0.977 0.023;0.074 0.926]
+pi_inf=pi^10000000000
+
+ah_guess=1.1
 
 %%%% Set up discretized state space
 k_min = 0;
@@ -16,7 +20,7 @@ k_mat = repmat(k', [1 num_k]); % this will be useful in a bit
 
 %%%% Set up consumption and return function
 % 1st dim(rows): k today, 2nd dim (cols): k' chosen for tomorrow
-cons = k_mat .^ alpha + (1 - delta) * k_mat - k_mat'; 
+cons =a_l* (k_mat .^ alpha) + (1 - delta) * k_mat - k_mat'; 
 
 ret = cons .^ (1 - sigma) / (1 - sigma); % return function
 % negative consumption is not possible -> make it irrelevant by assigning
